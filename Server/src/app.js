@@ -10,7 +10,7 @@ app.use(express.static("public"))
 
 //User Routes
 import userRouter from  "./routes/user.routes.js"
-app.use("/api/user", userRouter)
+app.use("/api/users", userRouter)
 
 //Team Routes
 import teamRouter from "./routes/team.routes.js"

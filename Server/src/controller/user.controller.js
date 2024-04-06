@@ -77,7 +77,7 @@ const getUserById = asyncHandler(async (req, res) => {
         throw new ApiError(400, "User ID is required");
     }
     if (isNaN(id)) {
-        throw new ApiError(400, "User ID must be a number");
+        throw new ApiError(400, "User ID must be a number ");
     }
 
     const user = await User.findOne({
@@ -167,7 +167,7 @@ const deleteUser = asyncHandler(async (req, res) => {
 
 
 // Retrieve users with filtering, searching, and pagination
-const getUsers = asyncHandler(async (req, res) => {
+const searchUser = asyncHandler(async (req, res) => {
     const { page = 1, limit = 10, domain, gender, availability, search } = req.query;
     const skip = (page - 1) * limit;
     let query = {};
@@ -192,7 +192,7 @@ const getUsers = asyncHandler(async (req, res) => {
     // Get total count of users for pagination
     const totalCount = await User.countDocuments(query);
   
-    return res.status(200).json(new ApiResponse(200, { users, totalCount }, "Users retrieved successfully"));
+    return res.status(200).json(new ApiResponse(200, {totalCount, users }, "Users retrieved successfully"));
   });
   
 
@@ -204,7 +204,7 @@ export {
     getUserById,
     UpdateUser,
     deleteUser,
-    getUsers
+    searchUser
 }
 
 
